@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 import Peer from 'simple-peer';
 
 const SocketContext = createContext();
-const socket = io('http://localhost:5000');
+const socket = io('http://localhost:7000');
 
 const ContextProvider = ({ children }) => {
   const [stream, setStream] = useState(null);
@@ -31,7 +31,7 @@ const ContextProvider = ({ children }) => {
     const peer = new Peer({ initiator: false, trickle: false, stream });
 
     peer.on('signal', (data) => {
-      socket.emit('answerCall', { signal: data, to: call.from });
+      socket.emit('answercall', { signal: data, to: call.from });
     });
     peer.on('stream', (currentStream) => {
       userVideo.current.srcObject = currentStream;

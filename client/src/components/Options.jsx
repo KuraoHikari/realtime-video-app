@@ -52,7 +52,7 @@ const Options = ({ children }) => {
               </Typography>
               <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth />
               <CopyToClipboard text={me} className={classes.margin}>
-                <Button variant="contained" color="primary" fullWidth startIcon={<Assignment frontSize="large" />}>
+                <Button variant="contained" color="primary" fullWidth startIcon={<Assignment fontSize="large" />}>
                   Copy Your ID
                 </Button>
               </CopyToClipboard>
@@ -62,16 +62,23 @@ const Options = ({ children }) => {
                 Make a call
               </Typography>
               <TextField label="ID to Call" value={idToCall} onChange={(e) => setIdToCall(e.target.value)} fullWidth />
-              {}
+              {callAccepted && !callEnded ? (
+                <Button variant="contained" color="secondary" startIcon={<PhoneDisabled fontSize="large" />} fullWidth onClick={leaveCall} className={classes.margin}>
+                  Hang Up
+                </Button>
+              ) : (
+                <Button variant="contained" color="primary" startIcon={<Phone fontSize="large" />} fullWidth onClick={() => callUser(idToCall)} className={classes.margin}>
+                  Call
+                </Button>
+              )}
               {/* <CopyToClipboard text={me} className={classes.margin}>
                 <Button variant="contained" color="primary" fullWidth startIcon={<Assignment frontSize="large" />}></Button>
               </CopyToClipboard> */}
             </Grid>
           </Grid>
         </form>
+        {children}
       </Paper>
-      Option
-      {children}
     </Container>
   );
 };
